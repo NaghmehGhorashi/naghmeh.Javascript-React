@@ -1,27 +1,37 @@
-
-const apiUrl = "https://api.example.com/data";
-
-function fetchData(url) {
-  fetch(url)
-    .then((response) => {
-      if (response.ok) {
-        throw new Error("Network response was not ok " + response.statusText);
-      }
-      return response.json();
+fetch("https://api.example.com/data")
+    .then(response => {
+        console.log(response.data);
     })
-    .then((data) => {
-      console.log(data);
-    });
-}
+    .catch(error => console.error("Error fetching data:", error));
+    fetch("https://api.example.com/data")
+    .then(response => {
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        return response.json();
+    })
+    .then(data => console.log("Fetched data:", data)) 
+    .catch(error => console.error("Error fetching data:", error));
+    function fetchData() {
+      fetch("https://jsonplaceholder.typicode.com/posts")
+          .then(response => {
+              if (!response.ok) {
+                  throw new Error(`Failed to fetch. Status: ${response.status}`);
+              }
+              return response.json();
+          })
+          .then(data => {
+              console.log("Data fetched successfully:", data);
+            
+              data.forEach(post => {
+                  console.log(`Post ID: ${post.id}, Title: ${post.title}`);
+              });
+          })
+          .catch(error => {
+              console.error("Error during GET request:", error);
+          });
+  }
+  
 
-fetchData(apiUrl);
-
-
-function postData(url, data) {}
-
-const dataToPost = {
-  name: "John Doe",
-  age: 21,
-};
-
-postData(apiUrl, dataToPost);
+  fetchData();
+  
