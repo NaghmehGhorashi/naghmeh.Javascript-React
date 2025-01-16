@@ -38,7 +38,7 @@
 // }
 
 
-// <----------------second method:-------------------->
+// <---------------second method:------------------->
 const formContainer=document.getElementById("formContainer");
 
 const form=document.createElement("form");
